@@ -1,37 +1,75 @@
 import time
-#import RPi.GPIO
-import datetime
+import RPi.GPIO as GPIO
 
-xPins = [6, 13, 19, 26]
-yPins = [1, 7, 8, 25]
+xPins = [6,13,19,26]
+yPins = [1,7,8,25]
 
 global xStep
 xStep = 0
 global yStep
 yStep = 0
 
-def step(axis, step):
-    for pin in axis:
+def step(pinAxis, step):
+    for pin in pinAxis:
         GPIO.output(pin, 0)
-    GPIO.output(axis[step % len(axis)], 1)
+    GPIO.output(pinAxis[step % len(pinAxis)], 1)
 
-def driveAxis(xTrg, yTrg):
-    while(xStep != xTrg and yStep != yTrg):
-        #X axis
-        if(xStep == xTrg):
-            return
-        elif(xStep < xTrg):
+def driveAxis(trgX, trgY):
+    global xStep
+    global yStep
+    
+    while(xStep != trgX and yStep != trgY):
+        if(xStep < trgX):
             step(xPins, xStep-1)
-        elif(xStep > xTrg):
+            xStep -= 1 
+        elif(xStep > trgX):
             step(xPins, xStep+1)
-
-        #Y axis
-        if(xStep == yTrg):
-            return
-        elif(xStep < yTrg):
-            step(yPins, yStep-1)
-        elif(xStep > yTrg):
-            step(yPins, yStep+1)
+            xStep += 1
         
-        #Sleep so the motors can actually do the moving and grooving
+        if(yStep < trgY):
+            step(yPins, yStep-1)
+            yStep -= 1
+        elif(yStep > trgY):
+            step(yPins, yStep+1)
+            yStep += 1
+    
         time.sleep(0.01)
+    
+    for pin in xPins:
+        GPIO.output(pin, 0)
+    
+    for pin in yPins:
+        GPIO.output(pin, 0)
+
+try:
+    print("Setting up GPIO")
+    
+    GPIO.setmode(GPIO.BCM)
+
+    for pin in xPins:
+        GPIO.setup(pin, GPIO.OUT)
+    for pin in yPins:
+        GPIO.setup(pin, GPIO.OUT)
+    
+    driveAxis(0,0)
+    driveAxis(2,2)
+
+#     driveAxis(2,2)
+#     driveAxis(0,2)
+#     driveAxis(0,0)
+#     driveAxis(2,2)
+#     driveAxis(0,0)
+
+
+except:
+    print("Error")
+
+finally:
+    for pin in xPins:
+        GPIO.output(pin, 0)
+    
+    for pin in yPins:
+        GPIO.output(pin, 0)
+    
+    GPIO.cleanup()
+    print("Done")
