@@ -61,20 +61,31 @@ try:
     for pin in yPins:
         GPIO.setup(pin, GPIO.OUT)
     
-    coords = [
-        [0, 0],
-        [50, 0],
-        [100, 25],
-        [75, 50],
-        [100, 100],
-        [200, 200],
-        [250, 300],
-        [500, 500],
-        [0,0]
-    ]
+    # coords = [
+    #     [0, 0],
+    #     [50, 0],
+    #     [100, 25],
+    #     [75, 50],
+    #     [100, 100],
+    #     [200, 200],
+    #     [250, 300],
+    #     [500, 500],
+    #     [0,0]
+    # ]
 
-    for pair in coords:
-        driveAxis(pair[0], pair[1])
+    # for pair in coords:
+    #     driveAxis(pair[0], pair[1])
+
+    while True:
+        inp = input("Enter coords in order x, y\ne.g. \"0 0\"\nOr type 'exit' to exit")
+
+        if(inp == "exit"):
+            break
+
+        coords = inp.split(" ")
+        driveAxis(coords[0], coords[1])
+
+    driveAxis(0, 0)
 
 except:
     print("Error")
