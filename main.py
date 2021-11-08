@@ -53,13 +53,12 @@ try:
         GPIO.setup(pin, GPIO.OUT)
     
     driveAxis(0,0)
-    driveAxis(2,2)
-
-#     driveAxis(2,2)
-#     driveAxis(0,2)
-#     driveAxis(0,0)
-#     driveAxis(2,2)
-#     driveAxis(0,0)
+    driveAxis(20,20)
+    driveAxis(20,20)
+    driveAxis(0,20)
+    driveAxis(0,0)
+    driveAxis(20,20)
+    driveAxis(0,0)
 
 
 except:
