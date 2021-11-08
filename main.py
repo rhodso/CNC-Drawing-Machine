@@ -18,6 +18,7 @@ def driveAxis(trgX, trgY):
     global xStep
     global yStep
 
+    print("Moving to coords:\nX: " + str(trgX) + " Y: " + str(trgY))
     
     while(xStep != trgX or yStep != trgY):
         if(xStep < trgX):
@@ -42,6 +43,8 @@ def driveAxis(trgX, trgY):
     
         time.sleep(0.01)
     
+    print("Reached target")
+
     for pin in xPins:
         GPIO.output(pin, 0)
     
@@ -66,6 +69,7 @@ try:
         [100, 100],
         [200, 200],
         [250, 300],
+        [500, 500],
         [0,0]
     ]
 
