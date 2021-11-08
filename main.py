@@ -17,21 +17,21 @@ def step(pinAxis, step):
 def driveAxis(trgX, trgY):
     global xStep
     global yStep
-    
+
     
     while(xStep != trgX and yStep != trgY):
         if(xStep < trgX):
-            step(xPins, xStep-1)
+            step(xPins, xStep+1)
             xStep -= 1 
         elif(xStep > trgX):
-            step(xPins, xStep+1)
+            step(xPins, xStep-1)
             xStep += 1
         
         if(yStep < trgY):
-            step(yPins, yStep-1)
+            step(yPins, yStep+1)
             yStep -= 1
         elif(yStep > trgY):
-            step(yPins, yStep+1)
+            step(yPins, yStep-1)
             yStep += 1
     
         time.sleep(0.01)
@@ -74,3 +74,4 @@ finally:
     
     GPIO.cleanup()
     print("Done")
+
