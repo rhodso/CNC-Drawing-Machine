@@ -77,13 +77,13 @@ try:
     #     driveAxis(pair[0], pair[1])
 
     while True:
-        inp = input("Enter coords in order x, y\ne.g. \"0 0\"\nOr type 'exit' to exit")
+        inp = input("Enter coords in order x, y\ne.g. \"0 0\"\nOr type 'exit' to exit\n\t: ")
 
         if(inp == "exit"):
             break
 
         coords = inp.split(" ")
-        driveAxis(coords[0], coords[1])
+        driveAxis(int(coords[0]), int(coords[1]))
 
     driveAxis(0, 0)
 
