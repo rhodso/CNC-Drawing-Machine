@@ -19,13 +19,16 @@ def driveAxis(trgX, trgY):
     global yStep
 
     
-    while(xStep != trgX and yStep != trgY):
+    while(xStep != trgX or yStep != trgY):
         if(xStep < trgX):
             step(xPins, xStep+1)
             xStep += 1 
         elif(xStep > trgX):
             step(xPins, xStep-1)
             xStep -= 1
+        else:
+            for pin in xPins:
+                GPIO.output(pin, 0)
         
         if(yStep < trgY):
             step(yPins, yStep+1)
@@ -33,6 +36,9 @@ def driveAxis(trgX, trgY):
         elif(yStep > trgY):
             step(yPins, yStep-1)
             yStep -= 1
+        else:
+            for pin in yPins:
+                GPIO.output(pin, 0)
     
         time.sleep(0.01)
     
@@ -52,14 +58,19 @@ try:
     for pin in yPins:
         GPIO.setup(pin, GPIO.OUT)
     
-    driveAxis(0,0)
-    driveAxis(20,20)
-    driveAxis(20,20)
-    driveAxis(0,20)
-    driveAxis(0,0)
-    driveAxis(20,20)
-    driveAxis(0,0)
+    coords = [
+        [0, 0],
+        [50, 0],
+        [100, 25],
+        [75, 50],
+        [100, 100],
+        [200, 200],
+        [250, 300],
+        [0,0]
+    ]
 
+    for pair in coords:
+        driveAxis(pair[0], pair[1])
 
 except:
     print("Error")
