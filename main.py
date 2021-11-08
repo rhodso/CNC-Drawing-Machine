@@ -22,17 +22,17 @@ def driveAxis(trgX, trgY):
     while(xStep != trgX and yStep != trgY):
         if(xStep < trgX):
             step(xPins, xStep+1)
-            xStep -= 1 
+            xStep += 1 
         elif(xStep > trgX):
             step(xPins, xStep-1)
-            xStep += 1
+            xStep -= 1
         
         if(yStep < trgY):
             step(yPins, yStep+1)
-            yStep -= 1
+            yStep += 1
         elif(yStep > trgY):
             step(yPins, yStep-1)
-            yStep += 1
+            yStep -= 1
     
         time.sleep(0.01)
     
