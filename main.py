@@ -18,6 +18,7 @@ def driveAxis(trgX, trgY):
     global xStep
     global yStep
     
+    
     while(xStep != trgX and yStep != trgY):
         if(xStep < trgX):
             step(xPins, xStep-1)
